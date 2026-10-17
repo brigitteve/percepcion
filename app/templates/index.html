@@ -412,36 +412,6 @@
           </div>
         </div>
 
-        <!-- Análisis de Archivo o Sesión Simulada (Demo final.py) -->
-        <div class="card" style="margin-bottom:14px">
-          <h2>Análisis de Archivo o Sesión Simulada (Demo final.py)</h2>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:10px">
-            Prueba el pipeline acústico cargando una sesión simulada con ground truth o subiendo un archivo de audio o video.
-          </div>
-          
-          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
-            <button id="apl-btn-sim" style="background:#204060;border-color:#356090;font-size:12px;padding:7px 12px">
-              ⚡ Cargar sesión simulada (Demo UPAO)
-            </button>
-          </div>
-
-          <div style="border-top:1px solid var(--line);padding-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <input type="file" id="apl-file-input" accept="audio/*,video/*" style="font-size:12px;flex:1;min-width:180px">
-            <label style="font-size:11.5px;color:var(--muted);display:flex;gap:4px;align-items:center">
-              <input type="checkbox" id="apl-file-improve" checked> Reducción de ruido
-            </label>
-            <button id="apl-file-btn" class="ghost" style="font-size:12px;padding:6px 12px">🚀 Analizar archivo</button>
-          </div>
-
-          <!-- Contenedor de resultados del análisis de archivo/simulación -->
-          <div id="apl-file-results" style="display:none;margin-top:12px">
-            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:6px">
-              <b id="apl-fr-title" style="color:var(--text)">Resultados del análisis</b>
-              <span id="apl-fr-meta" style="color:var(--muted);font-size:11px"></span>
-            </div>
-            <div id="apl-fr-timeline" class="apl-timeline-box"></div>
-          </div>
-        </div>
 
         <!-- Stats del motor -->
         <div class="card">

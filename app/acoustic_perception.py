@@ -56,11 +56,11 @@ CORTE_PASA_ALTOS_HZ = 80.0
 class ClassificationThresholds:
     running_steps_per_sec: float = 2.8      # Cadencia mínima para considerar 'corriendo' (pasos/s)
     walking_steps_min: float = 0.7          # Cadencia mínima para considerar 'caminando'
-    scream_fmin: float = 240.0              # Frecuencia fundamental F0 mínima de grito (Hz)
-    scream_fmax: float = 950.0              # Frecuencia fundamental F0 máxima de grito (Hz)
-    scream_min_confidence: float = 0.40     # Confianza mínima de voz (voiced_prob)
-    impact_rms_threshold: float = 0.22      # Pico RMS mínimo para impacto súbito
-    impact_crest_factor: float = 5.0        # Factor de cresta mínimo (peak / mean RMS)
+    scream_fmin: float = 180.0              # Frecuencia fundamental F0 mínima de grito (Hz)
+    scream_fmax: float = 1100.0             # Frecuencia fundamental F0 máxima de grito (Hz)
+    scream_min_confidence: float = 0.28     # Confianza mínima de voz (voiced_prob)
+    impact_rms_threshold: float = 0.13      # Pico RMS mínimo para impacto súbito
+    impact_crest_factor: float = 3.8        # Factor de cresta mínimo (peak / mean RMS)
 
 
 class SensitivityConfig:
@@ -216,7 +216,7 @@ def classify_window(
     if (
         thresholds.scream_fmin <= f0_median <= thresholds.scream_fmax
         and f0_conf >= thresholds.scream_min_confidence
-        and peak_rms >= 0.025
+        and peak_rms >= 0.012
     ):
         confidence = min(0.99, f0_conf)
         return {
