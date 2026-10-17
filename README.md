@@ -409,4 +409,5 @@ alertas son solo de vídeo y cámara en vivo.
 
 El código de este repositorio se distribuye bajo AGPL-3.0, alineado con
 Ultralytics. Los datasets y los modelos preentrenados **no** se incluyen y
-conservan sus propias licencias; ver [Créditos](#datasets-utilizados-y-créditos).
+conservan sus propias licencias; ver [Créditos](#datasets-utilizados-y-créditos).#   p e r c e p c i o n  
+ 
