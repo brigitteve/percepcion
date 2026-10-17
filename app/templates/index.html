@@ -102,6 +102,85 @@
           padding-top:10px; border-top:1px solid var(--line); }
   a { color:var(--accent); }
   video { width:100%; border-radius:8px; }
+
+  /* ===== PANEL AUDIO EN VIVO ===== */
+  .apl-grid { display:grid; grid-template-columns:1fr 340px; gap:16px; }
+  .apl-chip { display:inline-flex; align-items:center; gap:6px;
+              font-size:12px; font-weight:600; padding:5px 12px; border-radius:20  .chip-off   { background:#1c2030; color:#8b93a5; border:1px solid #2a3050; }
+  .chip-wait  { background:#1a2040; color:#6ea8fe; border:1px solid #3050a0;
+                animation:chip-pulse 1.4s ease-in-out infinite; }
+  .chip-ok    { background:#0d2318; color:#3fb85a; border:1px solid #1f6e3a; }
+  .chip-muted { background:#1a1a1a; color:#8b93a5; border:1px solid #333; }
+  .chip-error { background:#2a1010; color:#e03c3c; border:1px solid #6e1f1f; }
+  .chip-alto  { background:#380e0e; color:#ff4d4d; border:1px solid #ff4d4d;
+                box-shadow:0 0 12px rgba(255,77,77,0.4); animation:chip-pulse 0.8s ease-in-out infinite; }
+  .chip-medio { background:#2e1b07; color:#f2a83c; border:1px solid #f2a83c; }
+  .chip-caminando { background:#0d2318; color:#3fb85a; border:1px solid #1f6e3a; }
+  .chip-ruido_normal { background:#111a28; color:#6ea8fe; border:1px solid #284470; }
+  @keyframes chip-pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+  .apl-vu-wrap { background:#0d1018; border-radius:8px; padding:10px 12px; border:1px solid var(--line); margin-bottom:12px; }
+  #apl-vu { width:100%; height:28px; border-radius:4px; display:block; }
+  .apl-levels { display:flex; justify-content:space-between; font-size:11px;
+                color:var(--muted); margin-top:5px; }
+  .apl-levels b { color:var(--text); }
+
+  .apl-flash { display:none; position:fixed; top:0; left:0; right:0; z-index:9999;
+               background:rgba(224,60,60,.92); color:#fff; font-weight:700; font-size:15px;
+               padding:14px 24px; align-items:center; gap:14px; justify-content:center;
+               border-bottom:2px solid #ff6060; box-shadow:0 4px 24px rgba(224,60,60,.5); }
+  .apl-flash-anim { animation:flash-in .2s ease, flash-out .5s ease 4s forwards; }
+  @keyframes flash-in  { from{transform:translateY(-100%)} to{transform:translateY(0)} }
+  @keyframes flash-out { from{opacity:1} to{opacity:0;transform:translateY(-100%)} }
+
+  .apl-log  { max-height:420px; overflow-y:auto; }
+  .apl-item { display:flex; gap:10px; padding:12px; border-bottom:1px solid #1d212a;
+              animation:item-in .25s ease; }
+  @keyframes item-in { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:none} }
+  .apl-item:first-child { border-top-left-radius:8px; border-top-right-radius:8px; }
+  .apl-item:last-child  { border-bottom:0; }
+  .apl-alto  { border-left:3px solid var(--alto); background:rgba(224,60,60,0.04); }
+  .apl-medio { border-left:3px solid var(--medio); background:rgba(242,168,60,0.04); }
+  .apl-bajo  { border-left:3px solid var(--bajo); }
+  .apl-icon  { font-size:20px; flex-shrink:0; padding-top:1px; }
+  .apl-body  { flex:1; min-width:0; }
+  .apl-title { font-size:13px; font-weight:600; }
+  .apl-meta  { font-size:11px; color:var(--muted); margin-top:3px; line-height:1.5; }
+  .apl-desc  { font-size:11.5px; color:#d0d4e0; margin-top:3px; }
+  .apl-ref   { font-size:10.5px; color:#6b7280; margin-top:2px; }
+  .apl-badge { font-size:10px; padding:2px 8px; border-radius:9px; margin-left:6px;
+               font-weight:700; text-transform:uppercase; letter-spacing:0.04em; }
+  .apl-badge-alto  { background:rgba(224,60,60,.25); color:#ff5555; border:1px solid rgba(224,60,60,0.3); }
+  .apl-badge-medio { background:rgba(242,168,60,.25); color:#f2a83c; border:1px solid rgba(242,168,60,0.3); }
+  .apl-badge-bajo  { background:rgba(63,184,90,.25); color:#3fb85a; border:1px solid rgba(63,184,90,0.3); }
+  button.apl-del { background:transparent !important; border:0 !important; color:#788296 !important;
+                   cursor:pointer; font-size:16px; padding:2px 6px !important; margin:0;
+                   line-height:1; border-radius:4px; transition:all .15s; }
+  button.apl-del:hover { color:#ff5555 !important; background:rgba(224,60,60,.18) !important; }
+  .apl-placeholder { color:#39404f; font-size:13px; padding:40px 20px; text-align:center; }
+
+  .apl-metrics-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin:12px 0 6px; }
+  @media (max-width: 768px) { .apl-metrics-grid { grid-template-columns:repeat(2, 1fr); } }
+  .apl-metric-card { background:#0a0e16; border:1px solid var(--line); border-radius:8px; padding:8px 6px; text-align:center; }
+  .apl-metric-title { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em; white-space:nowrap; }
+  .apl-metric-val   { font-size:15px; font-weight:700; color:#fff; margin-top:4px; }
+
+  .apl-stats { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+  .apl-stat  { background:#111620; border:1px solid var(--line); border-radius:8px;
+               padding:10px 12px; }
+  .apl-stat .apl-stat-label { font-size:10.5px; color:var(--muted); text-transform:uppercase;
+                              letter-spacing:.06em; }
+  .apl-stat .apl-stat-val   { font-size:18px; font-weight:700; color:var(--text); margin-top:3px; }
+
+  .apl-timeline-box { margin-top:12px; background:#0b0e14; border:1px solid var(--line); border-radius:8px; padding:10px; max-height:260px; overflow-y:auto; }
+  .apl-tl-item { display:flex; justify-content:space-between; align-items:center; padding:7px 10px; border-bottom:1px solid #1a202c; font-size:12px; }
+  .apl-tl-item:last-child { border-bottom:0; }
+  .apl-tl-time { font-family:monospace; color:var(--muted); font-size:11px; margin-right:8px; }
+
+  /* tab badge */
+  .tab-badge { background:var(--alto); color:#fff; font-size:10px; font-weight:700;
+               padding:1px 6px; border-radius:10px; margin-left:6px;
+               display:none; vertical-align:middle; }
 </style>
 </head>
 <body>
@@ -113,6 +192,7 @@
     <div class="tab on" data-p="img">Imagen</div>
     <div class="tab" data-p="vid">Video</div>
     <div class="tab" data-p="cam">Cámara en vivo</div>
+    <div class="tab" data-p="audio" id="tab-audio">🎙 Audio en vivo<span class="tab-badge" id="apl-tab-badge"></span></div>
     <div class="tab" data-p="info">Clases y requisitos</div>
   </div>
 
@@ -217,11 +297,12 @@
         </div>
         <div id="cammeta" style="margin-top:10px;font-size:12.5px;color:var(--muted)"></div>
         <div class="card" style="margin-top:12px">
-          <label><input type="checkbox" id="audio-detection" checked> Analizar audio para posibles caídas</label>
-          <button type="button" class="ghost" id="audio-resume">Reanudar audio</button>
-          <div id="audio-status" role="status" aria-live="polite">Análisis acústico detenido</div>
-          <div class="req">Usa el audio de esta webcam. Un sonido no confirma una caída.</div>
-          <details><summary>Escuchar micrófono (puede causar realimentación)</summary><div id="audio-monitor"></div></details>
+          <div style="font-size:12.5px;color:var(--muted);line-height:1.6">
+            El análisis acústico de posibles caídas está disponible en la pestaña
+            <a href="#" id="cam-audio-link" style="color:var(--accent);font-weight:600">🎙 Audio en vivo</a>.
+          </div>
+          <div id="audio-status" role="status" aria-live="polite" style="font-size:11px;color:#555;margin-top:6px">Análisis acústico detenido</div>
+          <details style="margin-top:8px"><summary style="font-size:12px;color:var(--muted);cursor:pointer">Escuchar micrófono de la webcam</summary><div id="audio-monitor"></div></details>
         </div>
       </div>
       <div>
@@ -244,6 +325,184 @@
             La imagen de la izquierda es la que ve el navegador; el modelo corre
             en el servidor. Cada frame enviado se devuelve ya anotado, con la
             banda de FPS y riesgo.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLASH ALERT ACUSTICA (visible en cualquier pestaña) -->
+  <div id="apl-flash" class="apl-flash" role="alert" aria-live="assertive">
+    <span style="font-size:22px">🔊</span>
+    <span>ALERTA ACÚSTICA — Sonido compatible con posible caída detectado</span>
+    <button onclick="document.getElementById('apl-flash').style.display='none'"
+            style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);
+                   color:#fff;border-radius:6px;padding:4px 12px;cursor:pointer;font-size:13px">✕</button>
+  </div>
+
+  <!-- AUDIO EN VIVO -->
+  <div class="panel" id="p-audio">
+    <div class="apl-grid">
+
+      <!-- columna izquierda: controles + vúmetro + métricas en vivo + demo/archivo -->
+      <div>
+        <!-- Controles principales -->
+        <div class="card" style="margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+            <h2 style="margin:0">Módulo de Percepción de Sonido en Escaleras</h2>
+            <span id="apl-risk-badge" class="apl-badge apl-badge-bajo">RIESGO BAJO</span>
+          </div>
+          
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+            <button id="apl-start">🎙 Activar micrófono</button>
+            <button id="apl-stop" class="ghost" disabled>⏹ Detener</button>
+            <span id="apl-state-chip" class="apl-chip chip-off">⏹ Detenido</span>
+          </div>
+
+          <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+            <label style="font-size:12.5px;display:flex;gap:6px;align-items:center">
+              <span style="color:var(--muted)">Sensibilidad (RF-07):</span>
+              <select id="apl-sensitivity" style="background:#111622;color:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 8px;font-size:12px">
+                <option value="alta">Alta (alta sensibilidad)</option>
+                <option value="media" selected>Media (calibrada)</option>
+                <option value="baja">Baja (ambientes ruidosos)</option>
+              </select>
+            </label>
+            <label style="font-size:12.5px;display:flex;gap:6px;align-items:center">
+              <input type="checkbox" id="apl-beep" checked>
+              Pitido sonoro
+            </label>
+            <button id="apl-notif-btn" class="ghost" style="font-size:12px;padding:4px 10px">🔔 Notificaciones SO</button>
+          </div>
+
+          <div id="apl-status" role="status" aria-live="polite"
+               style="margin-top:8px;font-size:12px;color:var(--muted);min-height:18px">Análisis acústico detenido.</div>
+          
+          <!-- Métricas en vivo (final.py) -->
+          <div class="apl-metrics-grid">
+            <div class="apl-metric-card">
+              <div class="apl-metric-title">Pisadas / s (onsets)</div>
+              <div class="apl-metric-val" id="apl-steps-val">—</div>
+            </div>
+            <div class="apl-metric-card">
+              <div class="apl-metric-title">Factor de cresta</div>
+              <div class="apl-metric-val" id="apl-crest-val">—</div>
+            </div>
+            <div class="apl-metric-card">
+              <div class="apl-metric-title">F0 vocal (pYIN)</div>
+              <div class="apl-metric-val" id="apl-f0-val">—</div>
+            </div>
+            <div class="apl-metric-card">
+              <div class="apl-metric-title">Pico RMS</div>
+              <div class="apl-metric-val" id="apl-peak-rms-val">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vúmetro -->
+        <div class="card apl-vu-wrap" style="margin-bottom:14px">
+          <h2>Nivel de entrada del micrófono</h2>
+          <canvas id="apl-vu" height="28"></canvas>
+          <div class="apl-levels">
+            <span>RMS actual: <b id="apl-rms-value">0.0000</b></span>
+            <span>Nivel: <b id="apl-db-value">—</b></span>
+            <span style="color:#3fb85a">▌ Normal / Pasos</span>
+            <span style="color:#f2a83c">▌ Corriendo</span>
+            <span style="color:#e03c3c">▌ Impacto / Caída</span>
+          </div>
+        </div>
+
+        <!-- Análisis de Archivo o Sesión Simulada (Demo final.py) -->
+        <div class="card" style="margin-bottom:14px">
+          <h2>Análisis de Archivo o Sesión Simulada (Demo final.py)</h2>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px">
+            Prueba el pipeline acústico cargando una sesión simulada con ground truth o subiendo un archivo de audio o video.
+          </div>
+          
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+            <button id="apl-btn-sim" style="background:#204060;border-color:#356090;font-size:12px;padding:7px 12px">
+              ⚡ Cargar sesión simulada (Demo UPAO)
+            </button>
+          </div>
+
+          <div style="border-top:1px solid var(--line);padding-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input type="file" id="apl-file-input" accept="audio/*,video/*" style="font-size:12px;flex:1;min-width:180px">
+            <label style="font-size:11.5px;color:var(--muted);display:flex;gap:4px;align-items:center">
+              <input type="checkbox" id="apl-file-improve" checked> Reducción de ruido
+            </label>
+            <button id="apl-file-btn" class="ghost" style="font-size:12px;padding:6px 12px">🚀 Analizar archivo</button>
+          </div>
+
+          <!-- Contenedor de resultados del análisis de archivo/simulación -->
+          <div id="apl-file-results" style="display:none;margin-top:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:6px">
+              <b id="apl-fr-title" style="color:var(--text)">Resultados del análisis</b>
+              <span id="apl-fr-meta" style="color:var(--muted);font-size:11px"></span>
+            </div>
+            <div id="apl-fr-timeline" class="apl-timeline-box"></div>
+          </div>
+        </div>
+
+        <!-- Stats del motor -->
+        <div class="card">
+          <h2>Estado del motor acústico</h2>
+          <div class="apl-stats">
+            <div class="apl-stat">
+              <div class="apl-stat-label">Bloques procesados</div>
+              <div class="apl-stat-val" id="apl-chunks">—</div>
+            </div>
+            <div class="apl-stat">
+              <div class="apl-stat-label">Bloques descartados</div>
+              <div class="apl-stat-val" id="apl-dropped">—</div>
+            </div>
+            <div class="apl-stat">
+              <div class="apl-stat-label">Tiempo proceso (ms)</div>
+              <div class="apl-stat-val" id="apl-ms">—</div>
+            </div>
+            <div class="apl-stat">
+              <div class="apl-stat-label">Pipeline</div>
+              <div class="apl-stat-val" style="font-size:14px;color:#6ea8fe">Librosa / final.py</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- columna derecha: alertas -->
+      <div>
+        <div class="card" style="margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <h2 style="margin:0">Alertas acústicas</h2>
+            <span class="req">Persistente (alertas.jsonl)</span>
+          </div>
+          
+          <div class="alert-box apl-log" id="apl-log">
+            <div class="apl-placeholder">Sin alertas acústicas registradas.</div>
+          </div>
+          <div class="alert-bar" style="margin-top:10px">
+            <a href="/api/alertas.zip" download="alertas_audio.zip" class="abtn" id="apl-zip">Descargar ZIP</a>
+            <button id="apl-clear" class="abtn danger">Borrar todas</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Criterios de Riesgo Acústico (final.py)</h2>
+          <div style="font-size:12px;color:var(--muted);line-height:1.7">
+            <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #1a202c">
+              <b style="color:#ff5555">🔴 ALTO — Caída en escaleras:</b><br>
+              Sonido de impacto súbito caracterizado por alto pico de energía RMS y elevado factor de cresta.
+            </div>
+            <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #1a202c">
+              <b style="color:#ff5555">🔴 ALTO — Pedido de auxilio:</b><br>
+              Frecuencia fundamental F0 de un grito o voz angustiada detectada mediante pYIN (240 a 950 Hz).
+            </div>
+            <div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #1a202c">
+              <b style="color:#f2a83c">🟡 MEDIO — Persona corriendo:</b><br>
+              Alta frecuencia de pisadas por segundo (cadencia de onsets &ge; 2.8 pasos/s).
+            </div>
+            <div>
+              <b style="color:#3fb85a">🟢 BAJO — Tránsito seguro / caminando:</b><br>
+              Cadencia normal de pisadas (0.7 a 2.7 pasos/s) o ruido de fondo normal.
+            </div>
           </div>
         </div>
       </div>
@@ -276,6 +535,7 @@
 </div>
 
 <script src="/static/audio-live.js"></script>
+<script src="/static/audio-panel.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const BGR = c => `rgb(${c[2]},${c[1]},${c[0]})`;
@@ -286,7 +546,28 @@ document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
   document.querySelectorAll('.panel').forEach(x => x.classList.remove('on'));
   t.classList.add('on'); $('#p-' + t.dataset.p).classList.add('on');
   if (t.dataset.p !== 'cam') stopCam();
+  if (t.dataset.p === 'audio') {
+    if (typeof initAudioPanel === 'function') initAudioPanel();
+    const badge = $('#apl-tab-badge');
+    if (badge) badge.style.display = 'none';  // limpiar badge al entrar
+  } else {
+    // No destruimos el panel al salir para mantener la sesion activa
+  }
 });
+// Enlace "ir a audio" desde la pestaña cámara
+const _camAudioLink = document.getElementById('cam-audio-link');
+if (_camAudioLink) _camAudioLink.onclick = (e) => {
+  e.preventDefault();
+  const t = document.querySelector('.tab[data-p="audio"]');
+  if (t) t.click();
+};
+// Resize canvas VU al ancho disponible
+function _resizeVU() {
+  const vc = document.getElementById('apl-vu');
+  if (vc) vc.width = vc.offsetWidth || 480;
+}
+window.addEventListener('resize', _resizeVU);
+setTimeout(_resizeVU, 100);
 
 // deslizadores
 [['cimg','cvimg'],['cvid','cvvid'],['ccam','cvcam']].forEach(([i,o]) => {
@@ -513,12 +794,17 @@ let _estadoGlobal = 'DESCONOCIDO';
 let cam = { on:false, stream:null, busy:false, last:0, sent:0, err:null, ok:false, video:null, fps:0, t0:0, intentos:0 };
 let camGeneration = 0;
 let audioEl = null;  // <audio> para playback local del micrófono
-const fallAudio = new LiveFallAudio(message => { $('#audio-status').textContent = message; });
-$('#audio-detection').onchange = () => {
-  if ($('#audio-detection').checked && cam.on && cam.stream) fallAudio.start(cam.stream);
-  else fallAudio.stop();
-};
-$('#audio-resume').onclick = () => fallAudio.resume();
+// fallAudio: instancia de LiveFallAudio usada en la pestaña cámara
+// para el monitoreo del micrófono de la webcam. Las alertas del detector
+// las gestiona AudioPanel (audio-panel.js) en la pestaña dedicada.
+const fallAudio = new LiveFallAudio(message => {
+  const el = document.getElementById('audio-status');
+  if (el) el.textContent = message;
+});
+// Los controles de audio-detection y audio-resume ya no existen en el DOM:
+// el análisis acústico se maneja en la pestaña «Audio en vivo».
+// La instancia fallAudio se mantiene aquí solo para el monitoreo del micrófono
+// de la webcam (playback local) que sigue funcionando desde la cámara.
 
 function stopCam() {
   camGeneration++;
@@ -568,7 +854,7 @@ $('#bcam').onclick = async () => {
       setTimeout(reconnect, 3000);
     }
   });
-  if ($('#audio-detection').checked) fallAudio.start(cam.stream);
+  // El detector acustico se activa desde la pestana "Audio en vivo", no desde la camara.
 
   async function conectarCamara() {
    try {

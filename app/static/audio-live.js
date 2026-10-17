@@ -1,14 +1,18 @@
 /* Analiza exclusivamente las pistas del MediaStream que ya usa el video. */
 class LiveFallAudio {
-  constructor(onStatus) {
+  constructor(onStatus, onData = null) {
     this.onStatus = onStatus;
+    this.onData = onData;
     this.generation = 0;
     this.session = null;
     this.resources = null;
     this.stream = null;
   }
 
-  status(message) { this.onStatus(message); }
+  status(message, data = null) {
+    this.onStatus(message, data);
+    if (this.onData && data) this.onData(data);
+  }
 
   closeSession(id) {
     if (id) fetch(`/api/audio/sessions/${id}/stop`, {method:'POST', keepalive:true}).catch(() => {});
@@ -70,10 +74,19 @@ class LiveFallAudio {
       const show = data => {
         if (!current()) return;
         if (data.state === 'error') throw new Error(data.error || 'Error del detector');
-        const messages = {iniciando:'Cargando modelo acústico…', esperando_audio:'Esperando audio',
-          analizando:'Analizando audio de esta transmisión', silencio:'Audio sin señal o en silencio; no permite asegurar cobertura'};
+        const messages = {
+          iniciando: 'Cargando motor acústico…',
+          esperando_audio: 'Esperando audio',
+          analizando: 'Analizando audio en vivo',
+          silencio: 'Audio en silencio o sin señal',
+          caminando: '🚶 Persona caminando detectada (Riesgo BAJO)',
+          corriendo: '🏃 Persona corriendo detectada (Riesgo MEDIO)',
+          caida: '💥 ¡Impacto súbito / Caída detectada! (Riesgo ALTO)',
+          pedido_auxilio: '🗣 ¡Pedido de auxilio / Grito detectado! (Riesgo ALTO)',
+        };
+        const msg = messages[data.state] || data.state;
         this.status(context.state === 'suspended' ? 'Audio suspendido: pulsa «Reanudar audio»' :
-          `${messages[data.state] || data.state} · ${data.dropped_chunks || 0} bloques descartados`);
+          `${msg} · ${data.dropped_chunks || 0} bloques descartados`, data);
       };
       const fail = error => {
         if (current() && error.name !== 'AbortError') this.stop(`Audio no disponible: ${error.message}. El video continúa.`);
